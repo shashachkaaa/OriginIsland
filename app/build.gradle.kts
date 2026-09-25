@@ -4,13 +4,27 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
-val gitCommitHash: String = try {
-    val process = Runtime.getRuntime().exec("git rev-parse --short=8 HEAD")
-    process.waitFor()
-    process.inputStream.bufferedReader().use { it.readLine()?.trim() ?: "unknown" }
+fun git(vararg args: String): String? = try {
+    val process = ProcessBuilder(listOf("git") + args)
+        .directory(rootDir)
+        .redirectErrorStream(true)
+        .start()
+    val output = process.inputStream.bufferedReader().use { it.readText().trim() }
+    if (process.waitFor() == 0 && output.isNotEmpty()) output else null
 } catch (e: Exception) {
-    "unknown"
+    null
 }
+
+val gitCommitHash: String = git("rev-parse", "--short=8", "HEAD") ?: "unknown"
+
+// Every commit produces a higher versionCode, so a freshly built APK installs
+// over the previous one as an update instead of being refused as a downgrade.
+val gitCommitCount: Int = git("rev-list", "--count", "HEAD")?.toIntOrNull() ?: 1
+
+// Checked-in signing key: without it every machine (and every CI runner) signs
+// with its own generated debug key, and the resulting APKs refuse to replace
+// each other because the signatures differ.
+val sharedKeystore = rootProject.file("keystore/debug.keystore").takeIf { it.exists() }
 
 @Suppress("UnstableApiUsage")
 android {
@@ -21,19 +35,40 @@ android {
         applicationId = "com.thevakhovske.cunnyplayground"
         minSdk = 36
         targetSdk = 37
-        versionCode = 1
+        versionCode = gitCommitCount
         versionName = "1.0-$gitCommitHash"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        if (sharedKeystore != null) {
+            create("shared") {
+                storeFile = sharedKeystore
+                storePassword = "android"
+                keyAlias = "androiddebugkey"
+                keyPassword = "android"
+            }
+        }
+    }
+
     buildTypes {
+        debug {
+            if (sharedKeystore != null) {
+                signingConfig = signingConfigs.getByName("shared")
+            }
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = if (sharedKeystore != null) {
+                signingConfigs.getByName("shared")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
     compileOptions {
