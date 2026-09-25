@@ -1,111 +1,169 @@
 <resources>
     <string name="app_name">CunnyPlayground</string>
-    
+
     <string name="tab_playground">Песочница</string>
     <string name="tab_hyperisland">HyperIsland</string>
     <string name="tab_recaster">Перехватчик</string>
-    
+
     <string name="title_playground">Песочница Live Updates</string>
     <string name="title_hyperisland">Песочница HyperIsland</string>
     <string name="title_recaster">Перехватчик уведомлений</string>
-    
+
     <string name="settings">Настройки</string>
     <string name="back">Назад</string>
-    
-    <string name="section_notif_info">Инфо уведомления</string>
+
+    <string name="section_notif_info">Данные уведомления</string>
     <string name="label_title">Заголовок</string>
     <string name="label_text">Текст</string>
-    <string name="label_subtext">Подзаголовок</string>
-    <string name="label_chip_text">Текст чипа статуса</string>
-    
+    <string name="label_subtext">Доп. текст</string>
+    <string name="label_chip_text">Текст статус-чипа</string>
+
     <string name="section_settings">Настройки</string>
-    <string name="pref_ongoing">Закрепленное</string>
-    <string name="pref_promoted">Приоритетное (Чип статуса)</string>
+    <string name="pref_ongoing">Постоянное (несмахиваемое)</string>
+    <string name="pref_promoted">Приоритетное (статус-чип)</string>
     <string name="pref_chrono">Хронометр</string>
-    <string name="pref_show_progress">Показывать прогресс-бар</string>
-    
+    <string name="pref_show_progress">Показывать индикатор прогресса</string>
+
     <string name="section_icon">Иконка</string>
     <string name="icon_timer">Таймер</string>
     <string name="icon_call">Звонок</string>
     <string name="icon_alert">Оповещение</string>
-    <string name="icon_default">Стандартная</string>
-    
+    <string name="icon_default">По умолчанию</string>
+
     <string name="btn_post">Отправить</string>
     <string name="btn_update">Обновить</string>
-    <string name="btn_clear_all">Очистить всё</string>
-    
+    <string name="btn_clear_all">Очистить все</string>
+
     <string name="section_posted_notifs">Отправленные уведомления</string>
-    
+
     <string name="section_hyper_payload">Данные HyperIsland</string>
     <string name="label_left_text">Левый текст</string>
     <string name="label_main_text">Основной текст</string>
-    <string name="section_raw_json">Сырой JSON (Опционально)</string>
-    <string name="label_custom_json">Пользовательский JSON</string>
-    <string name="btn_post_hyper">Отправить HyperIsland</string>
-    
+    <string name="section_raw_json">Свой JSON (необязательно)</string>
+    <string name="label_custom_json">JSON-пейлоад</string>
+    <string name="btn_post_hyper">Отправить в HyperIsland</string>
+
     <string name="section_casting_settings">Настройки трансляции</string>
     <string name="pref_cast_notifs">Транслировать уведомления</string>
-    <string name="pref_cast_notifs_summary">Пересылать перехваченные уведомления в Live Updates</string>
-    <string name="pref_use_app_icon">Иконки приложений</string>
+    <string name="pref_cast_notifs_summary">Пересылать перехваченные уведомления как Live Updates</string>
+    <string name="pref_use_app_icon">Иконки исходных приложений</string>
     <string name="pref_use_app_icon_summary">Использовать иконку приложения вместо иконки уведомления</string>
-    <string name="pref_show_progress_percent">Процент прогресса</string>
-    <string name="pref_show_progress_percent_summary">Отображать процент выполнения в чипе статуса</string>
-    <string name="pref_limit_chip">(Только AOSP) Лимит текста чипа</string>
-    <string name="pref_limit_chip_summary">Ограничить текст чипа 7 символами</string>
-    
+    <string name="pref_show_progress_percent">Показывать процент прогресса</string>
+    <string name="pref_show_progress_percent_summary">Отображать процент выполнения в статус-чипе</string>
+    <string name="pref_limit_chip">(Только AOSP) Ограничить текст чипа</string>
+    <string name="pref_limit_chip_summary">Не более 7 символов в статус-чипе</string>
+
     <string name="section_cast_as">Транслировать как</string>
     <string name="mode_live_updates">Live Updates</string>
     <string name="mode_hyperisland">HyperIsland</string>
-    
+
     <string name="section_actions">Действия</string>
-    <string name="action_grant_access">Доступ к уведомлениям</string>
-    <string name="action_grant_access_summary">Требуется для перехвата уведомлений</string>
+    <string name="action_grant_access">Выдать доступ к уведомлениям</string>
+    <string name="action_grant_access_summary">Необходим для перехвата уведомлений</string>
     <string name="action_select_apps">Выбрать приложения</string>
-    <string name="summary_apps_selected">Выбрано приложений: %d</string>
-    <string name="summary_app_selected">Выбрано 1 приложение</string>
     <string name="section_enabled_apps">Активные приложения (%d)</string>
-    
+
     <string name="title_select_apps">Выбор приложений</string>
-    <string name="label_search_apps">Поиск приложений...</string>
-    <string name="msg_loading_apps">Загрузка установленных приложений...</string>
-    
-    <string name="section_app_info">Информация о приложении</string>
+    <string name="label_search_apps">Поиск приложений…</string>
+    <string name="msg_loading_apps">Загрузка установленных приложений…</string>
+
+    <string name="section_app_info">О приложении</string>
     <string name="section_output_preview">Предпросмотр результата</string>
     <string name="section_icon_source">Источник иконки</string>
-    <string name="pref_icon_app">Оригинальная иконка приложения</string>
-    <string name="pref_icon_notif">Иконка уведомления по умолчанию</string>
-    <string name="pref_icon_extracted_none">Извлеченный ресурс (иконки не найдены)</string>
-    <string name="pref_icon_extracted">Извлеченный ресурс</string>
-    
-    <string name="section_hyper_mapping">Сопоставление HyperIsland</string>
+    <string name="pref_icon_app">Иконка приложения</string>
+    <string name="pref_icon_notif">Иконка уведомления</string>
+    <string name="pref_icon_extracted_none">Ресурс из приложения (иконки не найдены)</string>
+    <string name="pref_icon_extracted">Ресурс из приложения</string>
+
+    <string name="section_hyper_mapping">Разметка HyperIsland</string>
     <string name="section_left_source">Источник левого сегмента</string>
-    <string name="label_left_regex">Regex левого сегмента</string>
+    <string name="label_left_regex">Регулярное выражение для левого сегмента</string>
     <string name="section_main_source">Источник основного сегмента</string>
-    <string name="label_main_regex">Regex основного сегмента</string>
-    
-    <string name="section_lu_mapping">Сопоставление Live Update</string>
+    <string name="label_main_regex">Регулярное выражение для основного сегмента</string>
+
+    <string name="section_lu_mapping">Разметка Live Update</string>
     <string name="section_text_source">Источник текста</string>
-    <string name="label_text_regex">Regex фильтр текста</string>
-    
+    <string name="label_text_regex">Регулярное выражение для текста</string>
+
     <string name="section_discovered_res">Найденные ресурсы</string>
     <string name="section_last_render">Последний рендер уведомления</string>
-    <string name="section_raw_data">Последние сырые данные</string>
+    <string name="section_raw_data">Последние полученные данные</string>
     <string name="section_raw_dump">Сырой дамп</string>
-    <string name="btn_copy_dump">Копировать сырой дамп</string>
+    <string name="btn_copy_dump">Скопировать дамп</string>
     <string name="btn_save">Сохранить</string>
-    <string name="msg_config_saved">Конфигурация сохранена</string>
+    <string name="msg_config_saved">Настройки сохранены</string>
     <string name="msg_dump_copied">Дамп скопирован</string>
-    
-    <string name="warning_cn_rom_title">Внимание: Китайская прошивка!</string>
-    <string name="warning_cn_rom_msg">Xiaomi блокирует сторонние уведомления HyperIsland на китайских прошивках.\nHyperIsland может не отображаться.\nПожалуйста:\n\u2022 Заблокируйте доступ в сеть для Xiaomi Service Framework\n\u2022 Если есть root, включите \'Disable focus notification whitelist\' в Hypercelier.</string>
+
+    <string name="warning_cn_rom_title">Внимание: китайская прошивка!</string>
+    <string name="warning_cn_rom_msg">На китайских прошивках Xiaomi блокирует сторонние уведомления HyperIsland, поэтому остров может не появиться.\nЧто можно сделать:\n• Закрыть доступ в сеть для Xiaomi Service Framework\n• При наличии root включить «Disable focus notification whitelist» в Hypercelier</string>
 
     <string name="channel_name">Live Updates</string>
-    <string name="channel_desc">Канал для песочницы Live Updates</string>
+    <string name="channel_desc">Канал песочницы Live Updates</string>
+
+    <!-- OriginIsland (vivo) -->
+    <string name="title_originisland">Песочница OriginIsland</string>
+    <string name="section_origin_info">Данные OriginIsland (заглушка)</string>
+    <string name="section_origin_mapping">Разметка OriginIsland (заглушка)</string>
+    <string name="section_right_template">Шаблон правого сегмента (спецификация SuperX)</string>
+    <string name="template_rhythm">Ритм/Пульс</string>
+    <string name="template_dynamic_progress">Динамический прогресс</string>
+    <string name="template_loading">Состояние загрузки</string>
+    <string name="template_text_icon">Текст + иконка</string>
+    <string name="template_icon_text">Иконка + текст</string>
+    <string name="template_symmetry">Симметричная капсула</string>
+
+    <!-- Список отправленных уведомлений -->
+    <string name="notif_standard">Обычное</string>
+    <string name="notif_summary">ID: %1$d • %2$s</string>
+    <string name="notif_summary_chip">%1$s • Чип: %2$s</string>
+    <string name="text_updated">%1$s (обновлено)</string>
+
+    <!-- Выбор приложений -->
+    <string name="btn_select_all">Выбрать все</string>
+    <string name="btn_deselect_all">Убрать все</string>
+    <plurals name="apps_selected">
+        <item quantity="one">Выбрано %d приложение</item>
+        <item quantity="few">Выбрано %d приложения</item>
+        <item quantity="many">Выбрано %d приложений</item>
+        <item quantity="other">Выбрано %d приложения</item>
+    </plurals>
+
+    <!-- Настройка приложения -->
+    <string name="raw_field">%1$s: %2$s</string>
+    <string name="msg_waiting">Ожидание…</string>
+    <string name="msg_resource_info">ID: %1$d\nИмя: %2$s</string>
+    <string name="cd_render_preview">Предпросмотр рендера уведомления</string>
+    <string name="clip_label_dump">Дамп уведомления</string>
+
+    <!-- Фоновая служба -->
+    <string name="service_anchor_title">Фоновое уведомление</string>
+    <string name="service_anchor_text">Можно игнорировать</string>
+    <string name="default_notif_title">Текущая задача</string>
+    <string name="default_notif_text">Live Update активен</string>
+
+    <!-- Примеры -->
+    <string name="title_examples">Конструкторы HyperIsland</string>
+    <string name="channel_examples">Примеры HyperIsland</string>
+    <string name="btn_run">Запустить</string>
+    <string name="example_a_title">Пример A: инжектор RemoteViews</string>
+    <string name="example_a_summary">Полностью обходит JSON-движок MIUI (miui.focus.rv)</string>
+    <string name="example_a_notif_title">Секретная разметка</string>
+    <string name="example_a_notif_text">Посмотрите на остров.</string>
+    <string name="example_b_title">Пример B: спорт в реальном времени</string>
+    <string name="example_b_summary">Перелистывание цифр через sameWidthDigitInfo</string>
+    <string name="example_c_title">Пример C: шейдер Aura Glow</string>
+    <string name="example_c_summary">Наложение Lottie-анимации поверх иконки</string>
+    <string name="example_d_title">Пример D: обход через Bitmap Bundle</string>
+    <string name="example_d_summary">Передача готовых bitmap без ID ресурсов</string>
+    <string name="example_e_title">Пример E: концентрические кольца Apple</string>
+    <string name="example_e_summary">Многослойный прогресс через combinePicInfo</string>
+    <string name="example_f_title">Пример F: перетаскивание из острова</string>
+    <string name="example_f_summary">shareData включает drag&amp;drop прямо с острова</string>
 
     <string-array name="hype_source_options">
         <item>Заголовок</item>
         <item>Текст</item>
-        <item>Подтекст</item>
-        <item>Заголовок + Текст</item>
+        <item>Доп. текст</item>
+        <item>Заголовок + текст</item>
     </string-array>
 </resources>

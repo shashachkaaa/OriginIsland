@@ -61,8 +61,10 @@
     <string name="action_grant_access">Conceder acceso a notificaciones</string>
     <string name="action_grant_access_summary">Requerido para interceptar notificaciones</string>
     <string name="action_select_apps">Seleccionar aplicaciones para transmitir</string>
-    <string name="summary_apps_selected">%d aplicaciones seleccionadas</string>
-    <string name="summary_app_selected">1 aplicación seleccionada</string>
+    <plurals name="apps_selected">
+        <item quantity="one">%d aplicación seleccionada</item>
+        <item quantity="other">%d aplicaciones seleccionadas</item>
+    </plurals>
     <string name="section_enabled_apps">Aplicaciones habilitadas (%d)</string>
     
     <string name="title_select_apps">Seleccionar aplicaciones</string>

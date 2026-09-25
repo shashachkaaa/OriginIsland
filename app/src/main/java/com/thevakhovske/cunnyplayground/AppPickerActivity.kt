@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import androidx.core.graphics.drawable.toBitmap
 import top.yukonga.miuix.kmp.basic.BasicComponent
+import top.yukonga.miuix.kmp.basic.Button
 import top.yukonga.miuix.kmp.basic.Card
 import top.yukonga.miuix.kmp.basic.Checkbox
 import top.yukonga.miuix.kmp.basic.Icon
@@ -30,6 +31,7 @@ import top.yukonga.miuix.kmp.basic.IconButton
 import top.yukonga.miuix.kmp.basic.MiuixScrollBehavior
 import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.SmallTopAppBar
+import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.basic.TextField
 import top.yukonga.miuix.kmp.basic.rememberTopAppBarState
 import top.yukonga.miuix.kmp.icon.MiuixIcons
@@ -116,6 +118,11 @@ fun AppPickerScreen(onBack: () -> Unit) {
         }
     }
 
+    fun persistSelection() {
+        prefs.edit().putStringSet("cast_enabled_apps", selectedApps.toSet()).apply()
+        context.sendBroadcast(android.content.Intent("com.thevakhovske.cunnyplayground.RELOAD_NOTIFICATIONS"))
+    }
+
     val topAppBarScrollBehavior = MiuixScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -147,10 +154,38 @@ fun AppPickerScreen(onBack: () -> Unit) {
                 )
             }
 
+            if (!isLoading) {
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Button(
+                            onClick = {
+                                displayApps.forEach { app ->
+                                    if (!selectedApps.contains(app.packageName)) selectedApps.add(app.packageName)
+                                }
+                                persistSelection()
+                            },
+                            modifier = Modifier.weight(1f)
+                        ) { Text(stringResource(R.string.btn_select_all)) }
+                        Button(
+                            onClick = {
+                                selectedApps.removeAll(displayApps.map { it.packageName })
+                                persistSelection()
+                            },
+                            modifier = Modifier.weight(1f)
+                        ) { Text(stringResource(R.string.btn_deselect_all)) }
+                    }
+                }
+            }
+
             if (isLoading) {
                 item {
                     Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
-                        top.yukonga.miuix.kmp.basic.Text(stringResource(R.string.msg_loading_apps))
+                        Text(stringResource(R.string.msg_loading_apps))
                     }
                 }
             } else {
@@ -179,8 +214,7 @@ fun AppPickerScreen(onBack: () -> Unit) {
                                         } else {
                                             selectedApps.add(app.packageName)
                                         }
-                                        prefs.edit().putStringSet("cast_enabled_apps", selectedApps.toSet()).apply()
-                                        context.sendBroadcast(android.content.Intent("com.thevakhovske.cunnyplayground.RELOAD_NOTIFICATIONS"))
+                                        persistSelection()
                                     }
                                 )
                             },
@@ -190,8 +224,7 @@ fun AppPickerScreen(onBack: () -> Unit) {
                                 } else {
                                     selectedApps.add(app.packageName)
                                 }
-                                prefs.edit().putStringSet("cast_enabled_apps", selectedApps.toSet()).apply()
-                                context.sendBroadcast(android.content.Intent("com.thevakhovske.cunnyplayground.RELOAD_NOTIFICATIONS"))
+                                persistSelection()
                             }
                         )
                     }

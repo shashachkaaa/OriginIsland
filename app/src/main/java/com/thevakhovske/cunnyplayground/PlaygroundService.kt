@@ -57,8 +57,8 @@ class PlaygroundService : Service() {
         if (!isForegroundActive) {
             createNotificationChannel(CHANNEL_ID)
             val anchorNotification = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Background notification")
-                .setContentText("Ignore")
+                .setContentTitle(getString(R.string.service_anchor_title))
+                .setContentText(getString(R.string.service_anchor_text))
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setSilent(true)
                 .setOngoing(true)
@@ -113,8 +113,8 @@ class PlaygroundService : Service() {
     }
 
     private fun startPromotedNotification(intent: Intent) {
-        val title = intent.getStringExtra("title") ?: "Ongoing Task"
-        val text = intent.getStringExtra("text") ?: "Live Update Active"
+        val title = intent.getStringExtra("title") ?: getString(R.string.default_notif_title)
+        val text = intent.getStringExtra("text") ?: getString(R.string.default_notif_text)
         val subtext = intent.getStringExtra("subtext")
         val notificationId = intent.getIntExtra("id", NOTIFICATION_ID)
         val iconRes = intent.getIntExtra("icon_res", R.mipmap.ic_launcher_round)

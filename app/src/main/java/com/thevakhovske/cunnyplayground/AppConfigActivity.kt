@@ -106,7 +106,7 @@ fun AppConfigScreen(packageName: String, onBack: () -> Unit, onSave: () -> Unit)
     val lastTitle = remember { prefs.getString("${packageName}_last_title", "N/A") ?: "N/A" }
     val lastText = remember { prefs.getString("${packageName}_last_text", "N/A") ?: "N/A" }
     val lastSubText = remember { prefs.getString("${packageName}_last_subtext", "N/A") ?: "N/A" }
-    val lastDump = remember { prefs.getString("${packageName}_last_raw_dump", context.getString(R.string.section_raw_dump)) ?: "Waiting..." }
+    val lastDump = remember { prefs.getString("${packageName}_last_raw_dump", context.getString(R.string.msg_waiting)) ?: context.getString(R.string.msg_waiting) }
 
     val drawablesStr = remember { prefs.getString("${packageName}_last_drawables", "") ?: "" }
     val drawableIds = remember { drawablesStr.split(",").mapNotNull { it.trim().toIntOrNull() }.distinct() }
@@ -413,49 +413,62 @@ fun AppConfigScreen(packageName: String, onBack: () -> Unit, onSave: () -> Unit)
                 }
             } else if (castMode == "originisland") {
                 item {
-                    SmallTitle("OriginIsland Mapping (Placeholder)")
+                    SmallTitle(stringResource(R.string.section_origin_mapping))
 
-                    SmallTitle("Left Segment Source")
+                    SmallTitle(stringResource(R.string.section_left_source))
                     val sources = listOf("title", "text", "subtext", "titletext")
+                    val sourceLabels = listOf(
+                        stringResource(R.string.label_title),
+                        stringResource(R.string.label_text),
+                        stringResource(R.string.label_subtext),
+                        "${stringResource(R.string.label_title)}+${stringResource(R.string.label_text)}"
+                    )
                     Card(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth()) {
-                        sources.forEach { source ->
+                        sources.forEachIndexed { index, source ->
                             RadioButtonPreference(
                                 selected = originLeftSource == source,
                                 onClick = { originLeftSource = source },
-                                title = source.replaceFirstChar { it.uppercase() }
+                                title = sourceLabels[index]
                             )
                         }
                         TextField(
                             value = originLeftRegex,
                             onValueChange = { originLeftRegex = it },
-                            label = "Left Segment Regex",
+                            label = stringResource(R.string.label_left_regex),
                             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
                         )
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    SmallTitle("Main Segment Source")
+                    SmallTitle(stringResource(R.string.section_main_source))
                     Card(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth()) {
-                        sources.forEach { source ->
+                        sources.forEachIndexed { index, source ->
                             RadioButtonPreference(
                                 selected = originMainSource == source,
                                 onClick = { originMainSource = source },
-                                title = source.replaceFirstChar { it.uppercase() }
+                                title = sourceLabels[index]
                             )
                         }
                         TextField(
                             value = originMainRegex,
                             onValueChange = { originMainRegex = it },
-                            label = "Main Segment Regex",
+                            label = stringResource(R.string.label_main_regex),
                             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
                         )
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    SmallTitle("Right Segment Template (SuperX Spec)")
-                    val rightTemplates = listOf("Rhythm/Pulse" to 1, "Dynamic Progress" to 2, "Loading State" to 3, "Text + Icon" to 4, "Icon + Text" to 5, "Symmetry Capsule" to 6)
+                    SmallTitle(stringResource(R.string.section_right_template))
+                    val rightTemplates = listOf(
+                        stringResource(R.string.template_rhythm) to 1,
+                        stringResource(R.string.template_dynamic_progress) to 2,
+                        stringResource(R.string.template_loading) to 3,
+                        stringResource(R.string.template_text_icon) to 4,
+                        stringResource(R.string.template_icon_text) to 5,
+                        stringResource(R.string.template_symmetry) to 6
+                    )
                     Card(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth()) {
                         rightTemplates.forEach { (label, value) ->
                             RadioButtonPreference(
@@ -526,7 +539,7 @@ fun AppConfigScreen(packageName: String, onBack: () -> Unit, onSave: () -> Unit)
                                             .size(56.dp)
                                             .clickable {
                                                 val resName = try { ctx.resources.getResourceEntryName(id) } catch (_: Exception) { id.toString() }
-                                                Toast.makeText(context, "ID: $id\nName: $resName", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(context, context.getString(R.string.msg_resource_info, id, resName), Toast.LENGTH_SHORT).show()
                                             }
                                     )
                                 }
@@ -552,7 +565,7 @@ fun AppConfigScreen(packageName: String, onBack: () -> Unit, onSave: () -> Unit)
                         ) {
                             Image(
                                 bitmap = bitmap.asImageBitmap(),
-                                contentDescription = "Notification render preview",
+                                contentDescription = stringResource(R.string.cd_render_preview),
                                 modifier = Modifier.fillMaxWidth().padding(8.dp)
                             )
                         }
@@ -564,9 +577,9 @@ fun AppConfigScreen(packageName: String, onBack: () -> Unit, onSave: () -> Unit)
             item {
                 SmallTitle(stringResource(R.string.section_raw_data))
                 Card(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth()) {
-                    BasicComponent(title = "Title: $lastTitle")
-                    BasicComponent(title = "Text: $lastText")
-                    BasicComponent(title = "SubText: $lastSubText")
+                    BasicComponent(title = stringResource(R.string.raw_field, stringResource(R.string.label_title), lastTitle))
+                    BasicComponent(title = stringResource(R.string.raw_field, stringResource(R.string.label_text), lastText))
+                    BasicComponent(title = stringResource(R.string.raw_field, stringResource(R.string.label_subtext), lastSubText))
                 }
             }
 
@@ -585,7 +598,7 @@ fun AppConfigScreen(packageName: String, onBack: () -> Unit, onSave: () -> Unit)
                 Button(
                     onClick = {
                         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                        clipboard.setPrimaryClip(ClipData.newPlainText("Notification Dump", lastDump))
+                        clipboard.setPrimaryClip(ClipData.newPlainText(context.getString(R.string.clip_label_dump), lastDump))
                         Toast.makeText(context, context.getString(R.string.msg_dump_copied), Toast.LENGTH_SHORT).show()
                     },
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)

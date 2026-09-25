@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationCompat
 import top.yukonga.miuix.kmp.basic.BasicComponent
@@ -51,7 +52,7 @@ class ExamplesActivity : ComponentActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 "island_examples",
-                "HyperIsland Examples",
+                getString(R.string.channel_examples),
                 NotificationManager.IMPORTANCE_HIGH
             )
             notificationManager.createNotificationChannel(channel)
@@ -83,10 +84,10 @@ fun ExamplesScreen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             SmallTopAppBar(
-                title = "HyperIsland Builders",
+                title = stringResource(R.string.title_examples),
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(MiuixIcons.Back, contentDescription = "Back")
+                        Icon(MiuixIcons.Back, contentDescription = stringResource(R.string.back))
                     }
                 },
                 scrollBehavior = scrollBehavior
@@ -101,43 +102,43 @@ fun ExamplesScreen(onBack: () -> Unit) {
         ) {
             item {
                 ExampleCard(
-                    title = "Example A: RemoteViews Injector",
-                    summary = "Bypasses MIUI JSON engine completely (miui.focus.rv)",
+                    title = stringResource(R.string.example_a_title),
+                    summary = stringResource(R.string.example_a_summary),
                     onClick = { runExampleA(context) }
                 )
             }
             item {
                 ExampleCard(
-                    title = "Example B: Real-Time Sports",
-                    summary = "sameWidthDigitInfo clock flip integration",
+                    title = stringResource(R.string.example_b_title),
+                    summary = stringResource(R.string.example_b_summary),
                     onClick = { runExampleB(context) }
                 )
             }
             item {
                 ExampleCard(
-                    title = "Example C: Aura Glow Shader",
-                    summary = "Lottie injection native overlay on icon",
+                    title = stringResource(R.string.example_c_title),
+                    summary = stringResource(R.string.example_c_summary),
                     onClick = { runExampleC(context) }
                 )
             }
             item {
                 ExampleCard(
-                    title = "Example D: Bitmap Bundle Bypass",
-                    summary = "Inject raw bitmaps without resource ids",
+                    title = stringResource(R.string.example_d_title),
+                    summary = stringResource(R.string.example_d_summary),
                     onClick = { runExampleD(context) }
                 )
             }
             item {
                 ExampleCard(
-                    title = "Example E: Apple Concentric Rings",
-                    summary = "combinePicInfo layered progress info",
+                    title = stringResource(R.string.example_e_title),
+                    summary = stringResource(R.string.example_e_summary),
                     onClick = { runExampleE(context) }
                 )
             }
             item {
                 ExampleCard(
-                    title = "Example F: Drag & Drop Intent",
-                    summary = "shareData enables drag&drop from the island",
+                    title = stringResource(R.string.example_f_title),
+                    summary = stringResource(R.string.example_f_summary),
                     onClick = { runExampleF(context) }
                 )
             }
@@ -153,7 +154,7 @@ fun ExampleCard(title: String, summary: String, onClick: () -> Unit) {
             summary = summary,
             endActions = {
                 Button(onClick = onClick) {
-                    Text("Run")
+                    Text(stringResource(R.string.btn_run))
                 }
             }
         )
@@ -184,8 +185,8 @@ private fun runExampleA(context: Context) {
     """.trimIndent()
     val builder = Notification.Builder(context, "island_examples")
         .setSmallIcon(R.drawable.ic_alert)
-        .setContentTitle("Secret Layout")
-        .setContentText("Check the island.")
+        .setContentTitle(context.getString(R.string.example_a_notif_title))
+        .setContentText(context.getString(R.string.example_a_notif_text))
         .setOngoing(true)
     
     reflectSetPromotedOngoing(builder)

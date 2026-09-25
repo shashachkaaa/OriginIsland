@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -163,7 +164,7 @@ fun MainScreen() {
             TopAppBar(
                 title = when {
                     isMiui && selectedTab == labels.indexOf(tabHyperIsland) -> stringResource(R.string.title_hyperisland)
-                    isVivo && selectedTab == labels.indexOf("OriginIsland") -> "OriginIsland Playground"
+                    isVivo && selectedTab == labels.indexOf("OriginIsland") -> stringResource(R.string.title_originisland)
                     selectedTab == labels.indexOf(tabRecaster) -> stringResource(R.string.title_recaster)
                     else -> stringResource(R.string.title_playground)
                 },
@@ -332,7 +333,7 @@ fun PlaygroundScreen(paddingValues: PaddingValues, scrollBehavior: ScrollBehavio
                         val updateId = editingId ?: notifications.lastOrNull()?.id
                         if (updateId != null) {
                             val iconRes = getIconRes(selectedIcon)
-                            val updatedText = "$text (Updated)"
+                            val updatedText = context.getString(R.string.text_updated, text)
                             val idx = notifications.indexOfFirst { it.id == updateId }
                             if (idx != -1) {
                                 notifications[idx] = notifications[idx].copy(title = title, text = updatedText, iconRes = iconRes, isPromoted = isPromoted, statusChipText = statusChipText, showProgress = showProgress)
@@ -357,7 +358,7 @@ fun PlaygroundScreen(paddingValues: PaddingValues, scrollBehavior: ScrollBehavio
             items(notifications.toList()) { notif ->
                 BasicComponent(
                     title = notif.title,
-                    summary = "ID: ${notif.id} • ${if (notif.isPromoted) stringResource(R.string.pref_promoted).substringBefore("(") else "Standard"}${if (!notif.statusChipText.isNullOrEmpty()) " • Chip: ${notif.statusChipText}" else ""}",
+                    summary = notificationSummary(notif),
                     onClick = {
                         editingId = notif.id
                         title = notif.title
@@ -505,81 +506,81 @@ fun OriginIslandScreen(paddingValues: PaddingValues, scrollBehavior: ScrollBehav
             .scrollEndHaptic()
     ) {
         item {
-            SmallTitle("OriginIsland Info (Placeholder)")
+            SmallTitle(stringResource(R.string.section_origin_info))
             TextField(
                 value = title,
                 onValueChange = { title = it },
-                label = "Title",
+                label = stringResource(R.string.label_title),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
             )
             TextField(
                 value = text,
                 onValueChange = { text = it },
-                label = "Text",
+                label = stringResource(R.string.label_text),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
             )
             TextField(
                 value = subtext,
                 onValueChange = { subtext = it },
-                label = "SubText",
+                label = stringResource(R.string.label_subtext),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
             )
             TextField(
                 value = statusChipText,
                 onValueChange = { statusChipText = it },
-                label = "Status Chip Text",
+                label = stringResource(R.string.label_chip_text),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
             )
         }
 
         item {
-            SmallTitle("Settings")
+            SmallTitle(stringResource(R.string.section_settings))
             Card(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth()) {
                 CheckboxPreference(
                     checked = isOngoing,
                     onCheckedChange = { isOngoing = it },
-                    title = "Ongoing"
+                    title = stringResource(R.string.pref_ongoing)
                 )
                 CheckboxPreference(
                     checked = isPromoted,
                     onCheckedChange = { isPromoted = it },
-                    title = "Promoted (Status Chip)"
+                    title = stringResource(R.string.pref_promoted)
                 )
                 CheckboxPreference(
                     checked = useChrono,
                     onCheckedChange = { useChrono = it },
-                    title = "Chronometer"
+                    title = stringResource(R.string.pref_chrono)
                 )
                 CheckboxPreference(
                     checked = showProgress,
                     onCheckedChange = { showProgress = it },
-                    title = "Show Progress Bar"
+                    title = stringResource(R.string.pref_show_progress)
                 )
             }
         }
 
         item {
-            SmallTitle("Icon")
+            SmallTitle(stringResource(R.string.section_icon))
             Card(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth()) {
                 RadioButtonPreference(
                     selected = selectedIcon == 0,
                     onClick = { selectedIcon = 0 },
-                    title = "Timer"
+                    title = stringResource(R.string.icon_timer)
                 )
                 RadioButtonPreference(
                     selected = selectedIcon == 1,
                     onClick = { selectedIcon = 1 },
-                    title = "Call"
+                    title = stringResource(R.string.icon_call)
                 )
                 RadioButtonPreference(
                     selected = selectedIcon == 2,
                     onClick = { selectedIcon = 2 },
-                    title = "Alert"
+                    title = stringResource(R.string.icon_alert)
                 )
                 RadioButtonPreference(
                     selected = selectedIcon == 3,
                     onClick = { selectedIcon = 3 },
-                    title = "Default"
+                    title = stringResource(R.string.icon_default)
                 )
             }
         }
@@ -598,13 +599,13 @@ fun OriginIslandScreen(paddingValues: PaddingValues, scrollBehavior: ScrollBehav
                         postOriginNotification(context, title, text, subtext, "", "", "", iconRes)
                     },
                     modifier = Modifier.weight(1f)
-                ) { Text("Post") }
+                ) { Text(stringResource(R.string.btn_post)) }
                 Button(
                     onClick = {
                         val updateId = editingId ?: notifications.lastOrNull()?.id
                         if (updateId != null) {
                             val iconRes = getIconRes(selectedIcon)
-                            val updatedText = "$text (Updated)"
+                            val updatedText = context.getString(R.string.text_updated, text)
                             val idx = notifications.indexOfFirst { it.id == updateId }
                             if (idx != -1) {
                                 notifications[idx] = notifications[idx].copy(title = title, text = updatedText, iconRes = iconRes, isPromoted = isPromoted, statusChipText = statusChipText, showProgress = showProgress)
@@ -613,14 +614,14 @@ fun OriginIslandScreen(paddingValues: PaddingValues, scrollBehavior: ScrollBehav
                         }
                     },
                     modifier = Modifier.weight(1f)
-                ) { Text("Update") }
+                ) { Text(stringResource(R.string.btn_update)) }
                 Button(
                     onClick = {
                         stopService(context)
                         notifications.clear()
                     },
                     modifier = Modifier.weight(1f)
-                ) { Text("Clear All") }
+                ) { Text(stringResource(R.string.btn_clear_all)) }
             }
         }
     }
@@ -799,7 +800,7 @@ fun RecasterScreen(paddingValues: PaddingValues, scrollBehavior: ScrollBehavior,
                 )
                 ArrowPreference(
                     title = stringResource(R.string.action_select_apps),
-                    summary = if (enabledApps.size == 1) stringResource(R.string.summary_app_selected) else stringResource(R.string.summary_apps_selected, enabledApps.size),
+                    summary = pluralStringResource(R.plurals.apps_selected, enabledApps.size, enabledApps.size),
                     onClick = {
                         context.startActivity(Intent(context, AppPickerActivity::class.java))
                     }
@@ -834,6 +835,19 @@ fun RecasterScreen(paddingValues: PaddingValues, scrollBehavior: ScrollBehavior,
             }
         }
     }
+}
+
+
+@Composable
+private fun notificationSummary(notif: NotificationInfo): String {
+    val kind = if (notif.isPromoted) {
+        stringResource(R.string.pref_promoted).substringBefore("(").trim()
+    } else {
+        stringResource(R.string.notif_standard)
+    }
+    val base = stringResource(R.string.notif_summary, notif.id, kind)
+    val chip = notif.statusChipText
+    return if (chip.isNullOrEmpty()) base else stringResource(R.string.notif_summary_chip, base, chip)
 }
 
 // ── Helpers ──

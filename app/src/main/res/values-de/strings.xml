@@ -61,8 +61,10 @@
     <string name="action_grant_access">Benachrichtigungszugriff gewähren</string>
     <string name="action_grant_access_summary">Erforderlich zum Abfangen von Benachrichtigungen</string>
     <string name="action_select_apps">Apps zum Übertragen auswählen</string>
-    <string name="summary_apps_selected">%d Apps ausgewählt</string>
-    <string name="summary_app_selected">1 App ausgewählt</string>
+    <plurals name="apps_selected">
+        <item quantity="one">%d App ausgewählt</item>
+        <item quantity="other">%d Apps ausgewählt</item>
+    </plurals>
     <string name="section_enabled_apps">Aktivierte Apps (%d)</string>
     
     <string name="title_select_apps">Apps auswählen</string>

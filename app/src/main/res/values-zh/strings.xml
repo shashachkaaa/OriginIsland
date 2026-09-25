@@ -61,8 +61,9 @@
     <string name="action_grant_access">授予通知访问权限</string>
     <string name="action_grant_access_summary">拦截通知所需权限</string>
     <string name="action_select_apps">选择要重铸的应用</string>
-    <string name="summary_apps_selected">已选择 %d 个应用</string>
-    <string name="summary_app_selected">已选择 1 个应用</string>
+    <plurals name="apps_selected">
+        <item quantity="other">已选择 %d 个应用</item>
+    </plurals>
     <string name="section_enabled_apps">已启用的应用 (%d)</string>
     
     <string name="title_select_apps">选择应用</string>

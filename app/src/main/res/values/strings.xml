@@ -61,8 +61,6 @@
     <string name="action_grant_access">Grant Notification Access</string>
     <string name="action_grant_access_summary">Required for intercepting notifications</string>
     <string name="action_select_apps">Select Apps to Cast</string>
-    <string name="summary_apps_selected">%d apps selected</string>
-    <string name="summary_app_selected">1 app selected</string>
     <string name="section_enabled_apps">Enabled Apps (%d)</string>
     
     <string name="title_select_apps">Select Apps</string>
@@ -101,6 +99,64 @@
 
     <string name="channel_name">Live Updates</string>
     <string name="channel_desc">Channel for Live Updates Playground</string>
+
+    <!-- OriginIsland (vivo) -->
+    <string name="title_originisland">OriginIsland Playground</string>
+    <string name="section_origin_info">OriginIsland Info (Placeholder)</string>
+    <string name="section_origin_mapping">OriginIsland Mapping (Placeholder)</string>
+    <string name="section_right_template">Right Segment Template (SuperX Spec)</string>
+    <string name="template_rhythm">Rhythm/Pulse</string>
+    <string name="template_dynamic_progress">Dynamic Progress</string>
+    <string name="template_loading">Loading State</string>
+    <string name="template_text_icon">Text + Icon</string>
+    <string name="template_icon_text">Icon + Text</string>
+    <string name="template_symmetry">Symmetry Capsule</string>
+
+    <!-- Posted notifications list -->
+    <string name="notif_standard">Standard</string>
+    <string name="notif_summary">ID: %1$d \u2022 %2$s</string>
+    <string name="notif_summary_chip">%1$s \u2022 Chip: %2$s</string>
+    <string name="text_updated">%1$s (Updated)</string>
+
+    <!-- App picker -->
+    <string name="btn_select_all">Select All</string>
+    <string name="btn_deselect_all">Deselect All</string>
+    <plurals name="apps_selected">
+        <item quantity="one">%d app selected</item>
+        <item quantity="other">%d apps selected</item>
+    </plurals>
+
+    <!-- App config -->
+    <string name="raw_field">%1$s: %2$s</string>
+    <string name="msg_waiting">Waiting\u2026</string>
+    <string name="msg_resource_info">ID: %1$d\nName: %2$s</string>
+    <string name="cd_render_preview">Notification render preview</string>
+    <string name="clip_label_dump">Notification Dump</string>
+
+    <!-- Foreground service -->
+    <string name="service_anchor_title">Background notification</string>
+    <string name="service_anchor_text">Ignore</string>
+    <string name="default_notif_title">Ongoing Task</string>
+    <string name="default_notif_text">Live Update Active</string>
+
+    <!-- Examples -->
+    <string name="title_examples">HyperIsland Builders</string>
+    <string name="channel_examples">HyperIsland Examples</string>
+    <string name="btn_run">Run</string>
+    <string name="example_a_title">Example A: RemoteViews Injector</string>
+    <string name="example_a_summary">Bypasses MIUI JSON engine completely (miui.focus.rv)</string>
+    <string name="example_a_notif_title">Secret Layout</string>
+    <string name="example_a_notif_text">Check the island.</string>
+    <string name="example_b_title">Example B: Real-Time Sports</string>
+    <string name="example_b_summary">sameWidthDigitInfo clock flip integration</string>
+    <string name="example_c_title">Example C: Aura Glow Shader</string>
+    <string name="example_c_summary">Lottie injection native overlay on icon</string>
+    <string name="example_d_title">Example D: Bitmap Bundle Bypass</string>
+    <string name="example_d_summary">Inject raw bitmaps without resource ids</string>
+    <string name="example_e_title">Example E: Apple Concentric Rings</string>
+    <string name="example_e_summary">combinePicInfo layered progress info</string>
+    <string name="example_f_title">Example F: Drag &amp; Drop Intent</string>
+    <string name="example_f_summary">shareData enables drag&amp;drop from the island</string>
 
     <string-array name="hype_source_options">
         <item>Title</item>
